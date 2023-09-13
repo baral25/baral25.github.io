@@ -1,5 +1,9 @@
-*{
+* {
     font-family: sans-serif;
 }
+.highlight {
+    background-color: yellow; /* Change this to your desired highlight style */
+}
+
 
 
