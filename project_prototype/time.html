@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Color Changer</title>
+    <style>
+        body {
+            font-size: 24px;
+        }
+
+        .green-text {
+            color: green;
+        }
+
+        .red-text {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <p id="text">This text will change color at 5:00 PM.</p>
+    <label for="timeInput">Set Test Time (HH:MM):</label>
+    <input type="text" id="timeInput" placeholder="HH:MM">
+    <button onclick="setTestTime()">Set Time</button>
+
+    <script>
+        let testTime = null; // Variable to store the test time
+
+        // Function to check the time and change text color
+        function changeTextColor() {
+            const textElement = document.getElementById("text");
+            const currentTime = new Date();
+
+            // Use testTime if set, otherwise use current time
+            const timeToCheck = testTime || currentTime;
+            const hours = timeToCheck.getHours();
+            const minutes = timeToCheck.getMinutes();
+
+            // Check if it's past 5:00 PM
+            if (hours > 17 || (hours === 17 && minutes >= 0)) {
+                textElement.classList.remove("green-text");
+                textElement.classList.add("red-text");
+            } else {
+                textElement.classList.remove("red-text");
+                textElement.classList.add("green-text");
+            }
+        }
+
+        // Function to set the test time
+        function setTestTime() {
+            const timeInput = document.getElementById("timeInput").value;
+            const [hours, minutes] = timeInput.split(":");
+            if (!isNaN(hours) && !isNaN(minutes) && hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+                testTime = new Date();
+                testTime.setHours(parseInt(hours));
+                testTime.setMinutes(parseInt(minutes));
+                changeTextColor();
+            } else {
+                alert("Please enter a valid time in HH:MM format.");
+            }
+        }
+
+        // Check the time and change text color initially
+        changeTextColor();
+
+        // Check the time every minute and update text color
+        setInterval(changeTextColor, 60000); // Check every 60 seconds
+    </script>
+</body>
+</html>

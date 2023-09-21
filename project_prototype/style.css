@@ -1,0 +1,17 @@
+* {
+    font-family: sans-serif;
+}
+.highlight {
+    background-color: yellow; /* Change this to your desired highlight style */
+}
+/* In your style.css file or in a <style> tag within the HTML file */
+body {
+    background-image: url('back.jpeg'); /* Replace with the path to your image */
+    background-size: cover; /* Adjust as needed */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-attachment: fixed; /* Fixed background image */
+    /* You can add more background properties like background-position if needed */
+}
+
+
+
