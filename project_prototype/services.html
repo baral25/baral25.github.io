@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Curtin Food Pantry</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Add your custom CSS or style links here -->
+
+    <!-- Google Translate Styles -->
+    <style>
+        /* Customize the Google Translate language selector */
+        #google_translate_element {
+            display: inline-block;
+            background-color: #00ffea; /* Background color */
+            border: 1px solid #00ffdd; /* Border color */
+            border-radius: 4px; /* Rounded corners */
+            padding: 5px 10px; /* Padding */
+        }
+
+        /* Style the dropdown arrow icon */
+        .goog-te-gadget-icon {
+            display: none; /* Hide the default dropdown arrow icon */
+        }
+
+        /* Style the language dropdown button */
+        .goog-te-combo {
+            padding: 0;
+            font-size: 14px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Style the language dropdown options */
+        .goog-te-menu-value {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar from the front page -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Curtin Food Pantry</a>
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            <!-- Hamburger Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Our Services</h1>
+        <div class="row">
+            <!-- Service Card 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="placeholder-image1.jpg" class="card-img-top" alt="Service Location 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Service Location 1</h5>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+                        <a href="service1.html" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Service Card 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="placeholder-image2.jpg" class="card-img-top" alt="Service Location 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Service Location 2</h5>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+                        <a href="service2.html" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Service Card 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="placeholder-image3.jpg" class="card-img-top" alt="Service Location 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Service Location 3</h5>
+                        <p class="card-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+                        <a href="service3.html" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and other scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,ne',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false,
+            }, 'google_translate_element');
+        }
+    </script>
+    <!-- Add your custom JavaScript file if needed -->
+</body>
+</html>

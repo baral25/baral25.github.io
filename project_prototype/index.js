@@ -15,27 +15,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const markerGroup = L.layerGroup(Object.values(markers)).addTo(map);
 
+    // Function to handle row click and navigate to a new page
+    function handleRowClick(rowKey) {
+        navigateToPage(rowKey);
+
+        // Remove the 'highlight' class from all table rows
+        const tableRows = document.querySelectorAll('tbody tr');
+        tableRows.forEach(row => {
+            row.classList.remove('table-success');
+        });
+
+        // Find the corresponding table row by matching the marker key
+        const tableRow = document.querySelector(`tbody tr[data-key="${rowKey}"]`);
+
+        // Add the 'highlight' class to the corresponding table row
+        if (tableRow) {
+            tableRow.classList.add('table-success');
+            // Scroll to the highlighted table row
+            tableRow.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     // Add a click event listener to each marker
     Object.keys(markers).forEach(key => {
         const marker = markers[key];
         marker.on('click', function () {
-            // Remove the 'highlight' class from all table rows
-            const tableRows = document.querySelectorAll('tbody tr');
-            tableRows.forEach(row => {
-                row.classList.remove('table-success');
-            });
-
-            // Find the corresponding table row by matching the marker key
-            const tableRow = document.querySelector(`tbody tr[data-key="${key}"]`);
-
-            // Add the 'highlight' class to the corresponding table row
-            if (tableRow) {
-                tableRow.classList.add('table-success');
-                // Scroll to the highlighted table row
-                tableRow.scrollIntoView({ behavior: 'smooth' });
-            }
+            handleRowClick(key);
         });
     });
+
+    // Add click event listeners to table rows
+    const tableRows = document.querySelectorAll('tbody tr');
+
+    tableRows.forEach(row => {
+        row.addEventListener('click', function () {
+            const rowKey = row.getAttribute('data-key');
+            handleRowClick(rowKey);
+        });
+    });
+
+    // Function to handle row click and navigate to a new page
+    function navigateToPage(rowKey) {
+        // Define the mapping of row keys to page URLs
+        const pageURLs = {
+            row1: 'page1.html',
+            row2: 'page2.html',
+            row3: 'page3.html'
+        };
+
+        // Get the URL associated with the clicked row
+        const targetURL = pageURLs[rowKey];
+
+        if (targetURL) {
+            window.location.href = targetURL; // Navigate to the URL
+        }
+    }
 
     // Check the current time and change text color accordingly
     function checkOpenStatus() {
