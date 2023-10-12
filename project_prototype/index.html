@@ -8,126 +8,195 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/path/to/cdn/flag-icon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Y57nWe6s5T8buq2mzvIqH6E7NJShp2HV6Tkpv8YFyBGg1NBpgcTHG8YlDp2R0BqD15c5PxdTNTcJHb36A5xlNzA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <style>
-        /* Your custom CSS styles here */
+        /* Style the Google Translate language selector */
+        .goog-te-combo {
+            background-color: #fff; /* Background color */
+            border: 1px solid #ccc; /* Border color */
+            border-radius: 4px; /* Rounded corners */
+            padding: 5px 10px; /* Padding */
+            font-size: 14px;
+            color: #333; /* Text color */
+        }
+    
+        /* Style the language dropdown options */
+        .goog-te-menu-value {
+            padding: 5px 10px;
+            font-size: 14px;
+            color: #333; /* Text color */
+        }
+    
+        /* Style the Google Translate dropdown arrow icon */
+        .goog-te-gadget-icon {
+            background: none; /* Remove default background */
+        }
+        .goog-te-banner-frame{
+        display:none !important;
+    }
     </style>
+    
+      
+
 </head>
-<body style="padding-top: 50px;">
-    <nav class="navbar navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Curtin Food Pantry</a>
+<nav class="navbar navbar-dark bg-dark -top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Curtin Food Pantry</a>
+        <div class="d-flex align-items-center ml-auto">
+            <!-- Hamburger Menu Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
+            <!-- Google Translate Element -->
+            <div class="container-fluid" id="google_translate_element"></div>
+        </div>
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto navbar-right">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class= "nav-item">
+                    <a class="nav-link" href="services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body>
+<!-- Div with Heading and Placeholder Text (Our Mission) -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="custom-div bg-light p-4 rounded">
+            <h2>Our Mission</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae lectus urna. Nullam in ligula sit amet quam tristique sodales. Vestibulum non ante eget dui ullamcorper tempus.</p>
+        </div>
+    </div>
+</div>
+    <div class="container-fluid mt-1">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="map-container bg-light p-1 rounded">
+                <div id="map" style="height: 500px;"></div>
             </div>
         </div>
-    </nav>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="map-container bg-light p-1 rounded">
-                    <div id="map" style="height: 500px;"></div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="location-list">
-                    <!-- Your location list content here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Table -->
-        <div class="row mt-4">
-            <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="location-list">
+                <!-- Your location list content here -->
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered table-hover ">
                         <thead>
-                            
                             <tr>
                                 <th scope="col">S.N</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Distance</th>
-                                <th scope="col">Required Documents</th>
-                                <th scope="col">Requirements</th>
+                                <th scope="col">Rating</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr data-key="row1">
                                 <th scope="row">1</th>
-                                <td>John Doe</td>
+                                <td>Food Bank WA</td>
                                 <td>5 km</td>
-                                <td>Identification</td>
-                                <td>Age above 18</td>
+                                <td>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </td>
                             </tr>
                             <tr data-key="row2">
                                 <th scope="row">2</th>
-                                <td>Jane Smith</td>
+                                <td>Lifesteram Church</td>
                                 <td>10 km</td>
-                                <td>Proof of address</td>
-                                <td>Valid email</td>
+                                <td>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </td>
                             </tr>
                             <tr data-key="row3">
                                 <th scope="row">3</th>
-                                <td>Jane Smith</td>
+                                <td>Vinnies</td>
                                 <td>10 km</td>
-                                <td>Proof of address</td>
-                                <td>Valid email</td>
+                                <td>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </td>
                             </tr>
                         </tbody>
+                        
                     </table>
                 </div>
             </div>
-        </div>
-
-        <!-- Div with Heading and Placeholder Text (Our Mission) -->
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <div class="custom-div bg-light p-4 rounded">
-                    <h2>Our Mission</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae lectus urna. Nullam in ligula sit amet quam tristique sodales. Vestibulum non ante eget dui ullamcorper tempus.</p>
+            <div class="container">
+                <div class="row">
+                    <div class=">
+                        <!-- Your div with space for paragraphs below the table -->
+                        <div class="additional-content bg-light p-4 rounded">
+                            <h2>Additional Information</h2>
+                            <p>Paragraph 1: Your text here.</p>
+                            <p>Paragraph 2: More information can go here.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
+
+    </div>
+
+    
 
     <!-- Your footer content here -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Contact Information</h5>
-                    <address>
-                        <strong>Curtin Food Pantry</strong><br>
-                        123 Main Street<br>
-                        City, State ZIP Code<br>
-                        <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
-                        <abbr title="Email">Email:</abbr> info@foodbankexample.com
-                    </address>
+    <footer class="w-100 py-4 flex-shrink-0">
+        <div class="container py-4">
+            <div class="row gy-4 gx-5">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="h1 text-black">FB.</h5>
+                    <p class="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                    <p class="small text-muted mb-0">&copy; Copyrights. All rights reserved. <a class="text-primary" href="#">Bootstrapious.com</a></p>
                 </div>
-                <div class="col-md-6">
-                    <h5>Follow Us</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="text-black mb-3">Quick links</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Get started</a></li>
+                        <li><a href="#">FAQ</a></li>
                     </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="text-white mb-3">Quick links</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Get started</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-black mb-3">Newsletter</h5>
+                    <p class="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                    <form action="#">
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="text" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-primary" id="button-addon2" type="button"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -136,7 +205,31 @@
     <!-- Your JavaScript and Bootstrap JS scripts here -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.js"></script>
     <script src="index.js"></script>
+    <script src="/path/to/cdn/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+        }
+    
+        function translateLanguage(lang) {
+            googleTranslateElementInit();
+            var $frame = $('.goog-te-menu-frame:first');
+            if (!$frame.size()) {
+                alert("Error: Could not find Google translate frame.");
+                return false;
+            }
+            $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
+            return false;
+        }
+    
+        $(function(){
+            $('.selectpicker').selectpicker();
+        });
+    </script>
+    
+    
 </body>
 </html>
