@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodbank Project Prototype</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/path/to/cdn/flag-icon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Y57nWe6s5T8buq2mzvIqH6E7NJShp2HV6Tkpv8YFyBGg1NBpgcTHG8YlDp2R0BqD15c5PxdTNTcJHb36A5xlNzA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Flowchart styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.5.1/dist/mermaid.css" />
+
+    <!-- Mermaid.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.5.1/dist/mermaid.min.js"></script>
+
+   <style>
+        .justified {
+            text-align: justify;
+        }
+         /* Custom styles for the flowchart container */
+         #flowchart-container {
+            max-width: 100%;
+        }
+
+        /* Your custom styles go here */
+        /* Style the Google Translate language selector */
+        .goog-te-combo {
+            background-color: #fff; /* Background color */
+            border: 1px solid #ccc; /* Border color */
+            border-radius: 4px; /* Rounded corners */
+            padding: 5px 10px; /* Padding */
+            font-size: 14px;
+            color: #333; /* Text color */
+        }
+
+        /* Style the language dropdown options */
+        .goog-te-menu-value {
+            padding: 5px 10px;
+            font-size: 14px;
+            color: #333; /* Text color */
+        }
+
+        /* Style the Google Translate dropdown arrow icon */
+        .goog-te-gadget-icon {
+            background: none; /* Remove default background */
+        }
+
+        /* Custom styles for the map container */
+        #map-container {
+            width: 100%; /* Make it full-width for responsiveness */
+            max-width: 100%;
+            height: 400px; /* Adjust the height as needed */
+        }
+
+        /* Custom styles for the L-shaped container */
+        #l-container {
+            padding: 20px; /* Adjust the padding as needed */
+        }
+
+        /* Custom styles for the flowchart container */
+        #flowchart-container {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar from the front page -->
+    <nav class="navbar navbar-dark bg-dark -top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Curtin Food Pantry</a>
+            <div class="d-flex align-items-center ml-auto">
+                <!-- Hamburger Menu Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Google Translate Element -->
+                <div class="container-fluid" id="google_translate_element"></div>
+            </div>
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto navbar-right">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class= "nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="logo_container mb-2">
+                    <img src="vinnies_logo.jpg" class="img-fluid" alt="Vinnies Logo">
+                    <div class="map-container p-1 rounded">
+                        <div id="map-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="l-container" class="">
+                    <h1 class="mb-2">Who are Vinnies</h1>
+                    <p class="justified">Vinnies Western Australia is an organization that is dedicated to serving the community by providing various services and support to individuals and families in need. They are committed to making a positive impact and creating a better future for those facing challenging circumstances.</p>
+                    <!-- Open in Google Maps Button -->
+                    <p class="justified">Vinnies Western Australia believes in the power of community and the importance of extending a helping hand to those who require assistance. They understand that life can present unexpected challenges, and it is their privilege to stand by those in need.</p>
+                    <p class="justified">The organization's commitment to service is unwavering. They provide a variety of support services, all aimed at making a difference in the lives of those they serve. Whether it's providing essential items, a warm meal, or a caring presence, their dedicated team is here to help. Vinnies Western Australia believes in the value of every individual and is dedicated to fostering a more inclusive, caring, and compassionate society.</p>
+                    <a href="https://www.google.com/maps/place/Vinnies+WA+Ozanam+House+Head+Office/@-32.0631676,115.9080893,17z/data=!3m1!4b1!4m6!3m5!1s0x2a32bd53a2254ac7:0x691e3c23ebf45c1f!8m2!3d-32.0631722!4d115.9106642!16s%2Fg%2F11smss4ghw?entry=ttu" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-map-marker"></i> Open in Google Maps
+                    </a>
+                    <!-- Visit Website Button -->
+                    <a href="https://www.vinnieswa.org.au/" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-globe"></i> Visit Website
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2">
+            <!-- Second Column: What We Do -->
+            <div class="col-md-6">
+                <h2>What Vinnies Do</h2>
+                <p>Vinnies WA offers a wide range of services to address the diverse needs of the community. These services include:</p>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Emergency Relief</td>
+                            <td>Providing immediate assistance to individuals and families in crisis situations.</td>
+                        </tr>
+                        <tr>
+                            <td>Food Assistance</td>
+                            <td>Offering food support to those experiencing food insecurity.</td>
+                        </tr>
+                        <tr>
+                            <td>Homelessness Support</td>
+                            <td>Assisting individuals without stable housing to find shelter and support.</td>
+                        </tr>
+                        <tr>
+                            <td>Mental Health Support</td>
+                            <td>Providing resources and care for mental health and well-being.</td>
+                        </tr>
+                        <tr>
+                            <td>Family and Youth Services</td>
+                            <td>Supporting families and youth with various programs and initiatives.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+
+  
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.js"></script>
+    <!-- Initialize and set up the map -->
+    <script>
+        var map = L.map('map-container').setView([51.505, -0.09], 13); // Set your initial map coordinates and zoom level
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Add a marker to the map
+        var marker = L.marker([51.505, -0.09]).addTo(map);
+    </script>
+
+    <!-- Bootstrap and other scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function translateLanguage(lang) {
+            googleTranslateElementInit();
+            var $frame = $('.goog-te-menu-frame:first');
+            if (!$frame.size()) {
+                alert("Error: Could not find Google translate frame.");
+                return false;
+            }
+            $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
+            return false;
+        }
+    </script>
+
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- Add your custom JavaScript file if needed -->
+
+    <!-- Your footer content here -->
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-white bg-dark">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-between p-4" style="background-color: #6351ce">
+            <!-- Left -->
+            <div class="me-5">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="#" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="text-white me-4">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="text-white me-4">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-white me-4">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" class="text-white me-4">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold">Curtin Food Pantry</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px">
+                    <p>Helping students in need get help.</p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold">Pages</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px">
+                    <p>
+                        <a href="index.html" class="text-white">Home</a>
+                    </p>
+                    <p>
+                        <a href="about.html" class="text-white">About Us</a>
+                    </p>
+                    <p>
+                        <a href="contact.html" class="text-white">Contacts</a>
+                    </p>
+                    <p>
+                        <a href="services.html" class="text-white">Services</a>
+                    </p>
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold">Useful links</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px">
+                    <p>
+                        <a href="https://waconnect.org.au/" class="text-white">WA Connect</a>
+                    </p>
+                    <p>
+                        <a href="https://askizzy.org.au/" class="text-white">Ask Izzy</a>
+                    </p>
+                    <p>
+                        <a href="https://www.foodbank.org.au/WA/" class="text-white">Food Bank WA</a>
+                    </p>
+                    <p>
+                        <a href="https://www.vinnieswa.org.au/" class="text-white">Vinnies</a>
+                    </p>
+                </div>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold">Contact</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px">
+                    <p><i class="fas fa-home mr-3"></i> Bently, Perth, WA 6000</p>
+                    <p><i class="fas fa-envelope mr-3"></i> Curtin@curtin.com</p>
+                    <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                </div>
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2023 Copyright:
+            <a class="text-white" href="https://github.com/baral25">baral25.github.io</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+</body>
+
+<!-- Initialize Mermaid and render the flowchart -->
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener("DOMContentLoaded", function () {
+      // Initialize Mermaid
+      mermaid.initialize({ startOnLoad: true });
+  
+      // Render the flowchart
+      mermaid.init(undefined, document.getElementById("flowchart"));
+    });
+  </script>
+  
+</html>
