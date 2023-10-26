@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <title>Flowchart: Student Assistance</title>
+    <!-- Include the diagram-js library -->
+    <script src="https://cdn.jsdelivr.net/npm/diagram-js@7.7.0/dist/bpmn-navigated-viewer.production.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div id="canvas" style="height: 400px;"></div>
+    </div>
+
+    <script>
+        // Create a new diagram
+        var viewer = new BpmnJS({
+            container: '#canvas'
+        });
+
+        // Define the diagram XML in BPMN format
+        var diagramXML = `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL">
+          <bpmn:process id="Process_1" isExecutable="false">
+            <bpmn:startEvent id="StartEvent_1"/>
+            <bpmn:task id="Task_1" name="Student facing food insecurity becomes aware of Curtin Communal Pantry"/>
+            <bpmn:exclusiveGateway id="Gateway_1"/>
+            <bpmn:task id="Task_2" name="Gets access to a hamper of food items"/>
+            <bpmn:task id="Task_3" name="Doesn't get access to a hamper of food items"/>
+            <bpmn:task id="Task_4" name="Student is satisfied"/>
+            <bpmn:task id="Task_5" name="Poster with QR code of MealMap website"/>
+            <bpmn:task id="Task_6" name="Map categorizes access levels - Only domestic or any student"/>
+            <bpmn:task id="Task_7" name="If student needs a referral to access Foodbank WA"/>
+            <bpmn:task id="Task_8" name="Student is satisfied"/>
+            <bpmn:task id="Task_9" name="If student requires services from Lifestreams Church"/>
+            <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_1"/>
+            <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_1" targetRef="Gateway_1"/>
+            <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_1" targetRef="Task_2">
+              <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">\${hamperAvailable}</bpmn:conditionExpression>
+            </bpmn:sequenceFlow>
+            <bpmn:sequenceFlow id="Flow_4" sourceRef="Gateway_1" targetRef="Task_3">
+              <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">\${!hamperAvailable}</bpmn:conditionExpression>
+            </bpmn:sequenceFlow>
+            <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_2" targetRef="Task_4"/>
+            <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_3" targetRef="Task_5"/>
+            <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_5" targetRef="Task_6"/>
+            <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_3" targetRef="Task_7"/>
+            <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_7" targetRef="Task_8"/>
+            <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_7" targetRef="Task_9"/>
+          </bpmn:process>
+        </bpmn:definitions>
+        `;
+
+        // Import the diagram XML and render it
+        viewer.importXML(diagramXML, function(err) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log('Diagram imported and rendered');
+            }
+        });
+    </script>
+</body>
+</html>
